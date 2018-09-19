@@ -7,6 +7,8 @@
 /bin/
 /build/
 build/*
+**/bin
+**/target
 
 .gradle
 /build/
