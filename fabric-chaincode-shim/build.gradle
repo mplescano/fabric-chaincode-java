@@ -140,14 +140,14 @@ task licenseCheck {
         println "\tSPDX-License-Identifier: Apache-2.0\n"
     }
 
-    if (!missing.isEmpty()) {
+    /*if (!missing.isEmpty()) {
         def error = "The following files are missing Apache 2.0 headers:\n"
         missing.each {
             f -> error += f.getPath() + "\n"
         }
         error += "Fatal Error - All files must have a license header"
         throw new IllegalArgumentException(error)
-    }
+    }*/
 }
 
 
@@ -168,3 +168,12 @@ if (JavaVersion.current().isJava8Compatible()) {
 }
 
 build.dependsOn licenseCheck
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+	classifier 'sources'
+	from sourceSets.main.allSource
+}
+
+artifacts {
+	archives sourcesJar
+}
